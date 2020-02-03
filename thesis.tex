@@ -1,0 +1,127 @@
+\documentclass[a4paper,12pt,twoside,openright]{book}
+% \usepackage{xltxtra}
+
+\usepackage{libertine}
+\renewcommand*\familydefault{\sfdefault}
+
+% \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+% \usepackage{CormorantGaramond}
+
+%\usepackage{epigrafica}
+%\usepackage[LGR,OT1]{fontenc}
+
+\usepackage[francais,english]{babel}
+\usepackage[utf8]{inputenc}
+
+% \renewcommand{\familydefault}{\sfdefault} % sans-serif font
+
+% - Header Options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\bwfoot{0}
+
+% - Header defs -
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{source/header.tex}
+
+% - Notes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \geometry{right=5cm}
+\usepackage[
+            shadow,
+            disable
+            ]{todonotes}
+
+% - User defs -
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeglossaries
+\input{source/userdefs.tex}
+
+% - Title and Author
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\Large Co-design Methodology of \SI{60}{\giga\hertz} Filter-LNA}
+\author{Rafael de Sousa MARINHO}
+\date{\today}
+
+% - Ne pas toucher
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pdfminorversion=5
+\pdfcompresslevel=9
+\pdfobjcompresslevel=3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% - Document -
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\bstctlcite{BSTcontrol}
+
+\coverXLIM
+\pagenumbering{roman}
+\setcounter{page}{1}
+% \newpage
+% \null
+% \clearpage
+% \newpage
+
+% - Page citation -
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{source/citation.tex}
+
+% - Page dedication -
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{source/preface.tex}
+
+% - Summary -
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{source/acknowledgments.tex}
+
+% - Copyright -
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{source/copyright.tex}
+
+% - Tables -
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{source/tables.tex}
+
+% - Início do documento - %%%%%%%%%
+\pagestyle{core}
+% \singlespacing
+% \onehalfspacing
+\doublespacing
+% \setstretch{1.8}
+
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+% %%Chapter - 01
+\chapter{First Example Chapter}
+\label{chap:01}
+\input{chapters/chapter01.tex}
+
+% % %%Chapter - 02
+% \chapter{Layout techniques for mm-Wave design in silicon}
+% \label{chap:layoutdesign}
+% \input{chapters/layout_design.tex}
+
+% %%Appendix
+% \appendix
+% \achapter{Appendix}
+% \input{chapters/appendix.tex}
+
+%%Bibliography
+%\renewcommand{\refname}{Bibliography}
+%\nocite{*}
+\newpage
+\pagestyle{watermark}
+\begingroup
+\singlespacing
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,BSTcontrol,mendeley}
+\endgroup
+
+% - Last page -
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{source/lastpage.tex}.
+
+\end{document}

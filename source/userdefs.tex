@@ -1,0 +1,171 @@
+% Ce fichier peut être utiliser librement avec des commands
+% personeles. Une des utilisations que je fais est de metre
+% les accronimes de glosaires dans ce fichier.
+
+% - Table style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\tableHeaderStyle}{
+    \rowfont{\leavevmode\color{black}}
+    \rowcolor{gray!20}
+}
+
+\renewcommand{\toprule}{\specialrule{1.5pt}{0pt}{0pt}}
+\renewcommand{\midrule}{\specialrule{0.5pt}{0pt}{0pt}}
+\renewcommand{\bottomrule}{\specialrule{1.5pt}{0pt}{0pt}}
+\belowrulesep=0pt
+\belowbottomsep=0pt
+\aboverulesep=0pt
+\abovetopsep=0pt
+
+% Correct for \cmidrule colour adjustment/vertical skip
+\newcommand{\corcmidrule}[1][0.4pt]{% \corcmidrule[<len>]
+  \\[\dimexpr-\normalbaselineskip-\belowrulesep-\aboverulesep-#1\relax]%
+}
+
+\newcommand{\rulefiller}[1]{%
+  \corcmidrule[0.5pt]\arrayrulecolor{gray!20}% change to cell colour
+  \cmidrule{#1}% "invisible" rul
+  \corcmidrule[0.5pt]\arrayrulecolor{black}% revert to regular line colour
+}%
+
+% - Figure placement
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \setlength{\intextsep}{20pt plus 1.0pt minus 2.0pt}
+% \setlength{\textfloatsep}{20pt}%distance between floats on the top or the bottom and the text;
+% \setlength{\floatsep}{12pt}%distance between two floats;
+% \setlength{\intextsep}{20pt}%distance between floats inserted inside the page text (using h) and the text
+% \setlength{\abovecaptionskip}{15pt}
+% \setlength{\belowcaptionskip}{-8pt}
+% \setlength{\belowcaptionskip}{-\baselineskip}\addtolength{\belowcaptionskip}{0pt}%
+
+% - SI font correction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sisetup{detect-all = true}
+
+% - some math functions definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*\conj[1]{#1^\ast}
+\newcommand*\mean[1]{\overline{#1}}
+
+% - Repeated use in text
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\umsquare}[2]{#1$\times$#2~\si{\square\micro\meter}}
+\newcommand{\mmsquare}[2]{#1$\times$#2~\si{\square\milli\meter}\xspace}
+\newcommand{\cadence}{Cadence\textsuperscript{\textregistered}\xspace}
+\newcommand{\virtuoso}{Virtuoso\textsuperscript{\textregistered}\xspace}
+\newcommand{\spectre}{Spectre\textsuperscript{\textregistered}\xspace}
+\newcommand{\keysight}{Keysight\textsuperscript{\textregistered}\xspace}
+\newcommand{\momentum}{Momentum\textsuperscript{\textregistered}\xspace}
+\newcommand{\ads}{ADS\textsuperscript{\textregistered}\xspace}
+\newcommand{\assura}{ASSURA\textsuperscript{\textregistered}\xspace}
+\newcommand{\nxp}{NXP\textsuperscript{\textregistered}\xspace}
+\newcommand{\cascade}{Cascade Microtech\textsuperscript{\textregistered}\xspace}
+\newcommand{\xlim}{XLIM\xspace}
+\newcommand{\platinom}{Platinom\xspace}
+\newcommand{\qubic}{QuBIC\xspace}
+\newcommand{\mextram}{MEXTRAM\xspace}
+
+\newcommand{\cm}{\cellcolor{black!30}}%
+\newcommand{\rut}[1]{\rotatebox[origin=c]{90}{#1}}%
+
+\newcommand{\ts}[1]{\textsuperscript{#1}}%
+\newcommand{\tpdf}[1]{\texorpdfstring{#1}}%
+
+% - Poubelle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Utilise ce function si vous ne voulez pas qui le paragraphe
+% soit imprimée dans le PDF.
+
+\newcommand{\poubelle}[1]{}
+
+% - Glossary
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setacronymstyle{long-short}
+
+\newacronym{ieee}{IEEE}{Institute of Electrical and Electronics Engineers}
+\newacronym{cad}{CAD}{Computer-Aided Design}
+\newacronym{em}{EM}{Electromagnetic}
+\newacronym{4g}{4G}{Fourth Generation Mobile Radio}
+\newacronym{5g}{5G}{Fifth Generation Mobile Radio}
+\newacronym{uwb}{UWB}{Ultra-Wild Band}
+\newacronym{ehf}{EHF}{Extremely High Frequency}
+\newacronym{osi}{OSI}{Open Systems Interconnection}
+\newacronym{cci}{CCI}{Co-Channel Interference}
+\newacronym{itu}{ITU}{International Telecommunications Union}
+\newacronym{itur}{ITU-R}{International Telecommunications Union Radiocommunication Sector}
+\newacronym{mimo}{MIMO}{Multiple Input, Multiple Output}
+\newacronym{amps}{AMPS}{Advanced Mobile Phone System}
+\newacronym{fdma}{FDMA}{Frequency-Division Multiple Access}
+\newacronym{gsm}{GSM}{Global System for Mobile Communications}
+\newacronym{tdma}{TDMA}{Time-Division Multiple Access}
+\newacronym{cdma}{CDMA}{Code-Division Multiple Access}
+\newacronym{cdma2k}{CDMA2000}{also known as C2K or IMT (\emph{International Mobile Telecommunications}) Multi‑Carrier}
+\newacronym{gprs}{GPRS}{General Packet Radio Service}
+\newacronym{edge}{EDGE}{Enhanced Data Rates for GSM Evolution}
+\newacronym{wcdma}{WCDMA}{Wideband Code Division Multiple Access}
+\newacronym{umts}{UMTS}{Universal Mobile Telecommunications System}
+\newacronym{hsupa}{HSUPA}{High Speed Uplink Packet Access}
+\newacronym{hspda}{HSPDA}{High Speed Downlink Packet Access}
+\newacronym{evdo}{EVDO}{Evolution-Data Optimized}
+\newacronym{lte}{LTE}{Long-Term Evolution}
+\newacronym{ofdma}{OFDMA}{Orthogonal frequency-division multiple access}
+\newacronym{scfdma}{SC-FDMA}{Single-Carrier FDMA}
+\newacronym{wimax}{WIMAX}{Worldwide Interoperability for Microwave Access}
+\newacronym{sofdma}{SOFDMA}{Scalable OFDMA }
+\newacronym{ltea}{LTE-A}{LTE Advanced}
+\newacronym{bdma}{BDMA}{Beam Division Multiple Access}
+\newacronym{fbmc}{FBMC}{Filter Bank Multi-Carrier}
+\newacronym{hdtv}{HDTV}{High-Definition Television}
+\newacronym{uhdtv}{Ultra-HD}{Ultra-High-Definition Television}
+\newacronym{ldpc}{LDPC}{Low-density Parity Check Code}
+\newacronym{vr}{VR}{Virtual Reality}
+\newacronym{if}{IF}{Intermediate Frequency}
+\newacronym{lo}{LO}{Local Oscillator}
+\newacronym{ic}{IC}{Integrated Circuit}
+\newacronym{fspl}{FSPL}{Free-Space Path Loss}
+\newacronym{rfic}{RFIC}{Radio-Frequency Integrated Circuits}
+\newacronym{hbt}{HBT}{Heterojunction Bipolar Transistor}
+\newacronym{lna}{LNA}{Low-Noise Amplifier}
+\newacronym{ism}{ISM}{Industrial, Scientific and Medical}
+\newacronym{rf}{RF}{Radio Frequency}
+\newacronym{snr}{SNR}{Signal-to-Noise Power Ratio}
+\newacronym{nfig}{NF}{Noise Figure}
+\newacronym{nfac}{F}{Noise Factor}
+\newacronym{lvs}{LVS}{Layout Versus Schematic}
+\newacronym{drc}{DRC}{Design Rule Check}
+\newacronym{ce}{CE}{Common Emitter}
+\newacronym{cb}{CB}{Common Base}
+\newacronym{mmic}{MMIC}{Monolithic Microwave Integrated Circuit}
+\newacronym{il}{IL}{Insertion Loss}
+\newacronym{tl}{TL}{Transmission Line}
+\newacronym{gsg}{GSG}{Ground-Signal-Ground}
+\newacronym{pdk}{PDK}{Process Design Kit}
+\newacronym{cl}{CL}{Conversion-Loss}
+\newacronym{mim}{MIM}{Metal-Insulator-Metal}
+\newacronym{vco}{VCO}{Voltage Controlled Oscillator}
+
+\newacronym[longplural={Millimeter-Waves}]{mmwaves}{mm-wave}{Millimeter-Wave}
+\newacronym[longplural={Wireless Personal Area Networks}]{wpan}{WPAN}{Wireless Personal Area Network}
+
+% - Siglas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\glsunset{ieee}
+\glsunset{itu}
+\glsunset{osi}
+\glsunset{mimo}
+
+% - TODO functions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\detail}[2][]{%
+    \todo[color=Turquoise, size=\footnotesize, caption={#2}, #1]{
+        \begin{spacing}{1.0}{\bf Detail}:~{\em #2}\end{spacing}}}%
+
+\newcommand{\attention}[2][]{%
+    \todo[color=Olive!60, size=\footnotesize, caption={#2}, #1]{
+        \begin{spacing}{1.0}{\bf Attention}:~{\em #2}\end{spacing}}}%
+
+\newcommand{\rewrite}[2][]{%
+    \todo[color=Red!60,size=\footnotesize, caption={#2}, #1]{
+        \begin{spacing}{1.0}{\bf Rewrite}:~{\em #2}\end{spacing}}}%
+
+\newcommand{\addref}{\todo[color=blue!40,size=\footnotesize]{Add reference.}}

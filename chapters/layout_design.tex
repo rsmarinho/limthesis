@@ -1,0 +1,279 @@
+\vspace*{6cm}
+\lettrine[lines=1]{\color{redxlim}S}{imulation}-driven circuit design becomes more and more important in microelectronic industry due to the necessity of fast execution for production. Although the design work-flow changes for different circuits specifications, it is based on a well known and secure design procedure that guarantee error-prone devices. However, new technologies keep tightening design constraints in frequency, consumption size and others, and it turns out that the use of a classical design approach has to be constantly reevaluated due to different problems introduced with the miniaturization of the technology.
+
+%driven circuit design becomes more and more important in microelectronic industry due the necessity of immediate execution for production. Although the design workflow changes for different circuits specifications, it is based in a well known and secure design procedure that guarantee error-prone devices. However, new technologies keep tightening design constraints in frequency, consumption size and others, and it turns out that the use of classical design approach have to be constantly reevaluated due different technological problems introduced with the miniaturization.
+
+%In this chapter an algorithmic method for circuit design -- validated in an \gls{lna} design -- for \gls{mmwaves} using \gls{cad} tools (\cadence \virtuoso and \ads \momentum) is demonstrated. Information about how to perform with proposed work-flow and further discussion are also suggested in last section.
+In this chapter, an algorithmic method for \gls{rfic} design -- validated with an LNA design -- for mm-wave using \gls{cad} tools (\cadence \virtuoso and \ads \momentum) is demonstrated. Information about how to perform with proposed work-flow and further discussion is also suggested in the last section.
+
+%%
+\rewrite{paragraph}
+
+% - Layout Design Methodology
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Layout Design Methodology}
+
+Classically a \gls{lna} design is done taking into consideration the requirements of the reception-chain for a given system transceiver (frequency, bandwidth, consumption, gain, noise, etc.), the objective is therefore to design a circuit that best fits its specifications. To perform this assignment a general design flow is roughly described in~\cite{geiger1990vlsi} and~\cite{saint2001ICGuide}, although it is not a closed rule process design can be divided into three steps before production: circuit requirement identification (which includes schematic analysis and simulation), layout design, and initial fabrication for evaluation. By that, during circuit \gls{rfic} \gls{lna} design, a not extensive list of tasks the designer have to perform is:
+%%
+\detail{Explain the design procedure in order to introduce what was modified during the chapter. Also this part of chapter establishes the starting point for the chapter analysis.}
+\begin{enumerate}[nolistsep]
+\item System specification:
+\begin{itemize}[nolistsep]
+	\item Mitigate  specifications and determine which technology should be used, if the case.
+	\item Determine which topology best fits to specifications.
+	\item Choose transistor(s) to be used in design that meet required noise, if the case.
+	\item Adapt the amplifier for noise and gain, in \gls{lna} design.
+	\item Develop a preliminary design of circuit.
+	\item Compute circuit design to evaluate if it meets specification
+\end{itemize}
+\item Layout design
+\begin{itemize}[nolistsep]
+	\item Sketch the circuit blueprint.
+	\item Draw the layout design.
+	\item Extract circuit from layout design.
+	\item Compare layout and schematic responses, then determine if design meet specifications.
+\end{itemize}
+\item Evaluation tests
+\begin{itemize}[nolistsep]
+	\item Measure fabricated circuit and compare with simulation results.
+\end{itemize}
+\end{enumerate}
+
+% For high-frequency \gls{mmwaves} design, special attention has to be employed during the circuits design because of wavelength. Within these frequencies, lumped element simulation can be inaccurate because the dimensions of the designed circuit usually is of the same order of magnitude of signal wavelength. Consequently, to ensure that the layout is not error-prone the designer has to be familiar with distributed circuit elements, transmission-line theory. 
+For high-frequency \gls{mmwaves} design the designer have to care about the wavelength of the \gls{rf} signal. For \gls{mmwaves} circuits, lumped element analysis can be inaccurate because the dimensions of the designed circuit can have the same order of magnitude of the signal wavelengths. Consequently, to ensure that the layout performs well the designer has to be familiar with distributed circuit elements and transmission-line theory. 
+
+More advanced designs need also that the designer be familiar with \gls{cad} software, considering that manual synthesis for complex mm-wave circuits become quickly impracticable primarily due to realization time. Nowadays, \gls{cad} software (notably \cadence \virtuoso and \keysight \ads) offers a great simulation environment to realize fabricated circuits that fit well with simulated results.
+
+%For high-frequency \gls{mmwaves} design special attention must be employed during the circuits design because of miniaturization. In these frequencies, lumped element simulation can be inaccurate because the circuit dimensions have same order of signals wavelength, and consequently, to ensure that layout is well conceived and not error-prone the designer have to be familiarized not only with distributed circuit elements and transmission-line theory, but also with \gls{cad} software, considering that hand synthesis for complex \gls{mmwaves} circuits become quickly impracticable primarily due realization time. Nowadays, \gls{cad} software (notably \cadence \virtuoso and \keysight \ads) offers great simulation environment to realize fabricated circuits that fits well with simulated results.
+\begin{figure}%[!ht]
+\centering
+	\begin{overpic}[scale=1]{chapters/images/chapter05/design_flux}
+	\end{overpic}
+\caption{Design flow for analog circuit design emphasizing layout design steps.}
+\label{fig-design_flux}
+\end{figure}
+
+On the classical design flow approach, it is first set the conditions and requirements of the circuit (technology, topology, transistors, etc.). After, we proceed with the second stage, when the definition and validation of the schematic of the circuit is done. Only then the layout design stage begins, as illustrated in Figure~\ref{fig-design_flux}. 
+
+%Here is necessary to makes it explicit that the \gls{drc} procedure is omitted from Figure 2.1 with no loss in comprehension. The \gls{drc} is an operation which assures that layout designed masks are in conformity with the rules of fabrication.
+
+%On the classical design flow approach\footnote{for lumped element circuit design} it is set that after very firsts condition are established (technology, topology, transistors, etc.) and the schematic of circuit is defined and validated, only then the layout design stage begins (as illustrated in Figure~\ref{fig-design_flux}). Here a parenthesis is necessary to explain that the \gls{drc} procedure is omitted of Figure~\ref{fig-design_flux} with no loss in comprehension. The \gls{drc} is an operation which assures that designed masks (layout) is in conformity with the rules of fabrication.
+%%
+\detail{includes explanation on why Figure~\ref{fig-design_flux} do not contain DRC stage on circuit design.}
+
+%Good layout design practice includes as first step a discussion of blueprint development of circuit layout, what contains the placement of each component (or each part) of circuit. After the circuit is completed, with all its components placed and this version is concluded, then the next move is to test layout against its schematic version; this way the designer can know if every circuit component is present in its layout version. This procedure is called~\gls{lvs} test.
+%%
+Good layout design practice includes within its firsts steps discussions about the blueprint of the circuit layout. This blueprint has to contain the placement of each component (or each part) of the circuit and it have to be in accordance with the \gls{drc} of the technology. The \gls{drc} is an operation which assures that the designed layout masks are in conformity with the rules of fabrication. After the circuit is completed the next move is to test the layout against its schematic version; thus the designer knows effectively if all circuit components are present in its layout version. This procedure is called~\gls{lvs} test.
+
+\detail{explains blueprint design, or where each part of circuit will be placed, and what is the lvs test.}
+
+%After \gls{lvs} is completed with no mistakes, the next step is to perform circuit extraction. The circuit extraction is the process of derivation of a schematic version of the layout, with its circuit interferers (intrinsically generated by layout) taken into account.  This phase is important because the designer can efficiently test the layout and determine if its response fit with the system design specification.  In case the extracted version simulation results are not in accord with what is attended, then corrections must be performed in the layout.\detail{introduces the extraction procedure on layout design.}
+
+After \gls{lvs} is completed with no mistakes, the next step is to perform circuit extraction. Circuit extraction is the process of derivation of a schematic version of the layout, with its circuit interferers (intrinsic from layout) taken into account. This action is important because the designer can efficiently test the layout and determine if its response fit with the system design specification.  In case the extracted version simulation results are not in accord with what is attended, then corrections must be performed in the layout.
+
+%Circuit extraction software can support different modes of layout circuit extraction. A general example is presented in Figure~\ref{fig-extraction_example} where various methods of extractions are shown. In Figure~\ref{fig-extraction_example} R stands for resistive extraction, C for capacitive extraction, L for inductive extraction and K for mutual interference between circuit metal connections, this last is represented with red arrows in RLCK extraction.
+
+Circuit extraction software can support different modes of layout circuit extraction.  A general example is presented in Figure~\ref{fig-extraction_example} where various methods of extractions are shown. In Figure~\ref{fig-extraction_example} {\em R} stands for resistive extraction, {\em C} for capacitive extraction, {\em L} for inductive extraction and {\em K} for coupling interference between circuit metal connections, this last is represented with arrows in {\em RLCK} extraction.
+
+\begin{figure}%[!ht]
+\centering
+	\begin{overpic}[scale=1.2]{chapters/images/chapter05/extraction_example}
+		\put(05,67.5)	{\color{black}\footnotesize Actual layout}
+		\put(45,67.5)	{\color{black}\footnotesize R extraction}
+		
+		\put(05,35.5)	{\color{black}\footnotesize C extraction}
+		\put(45,35.5)	{\color{black}\footnotesize RC extraction}
+		
+		\put(05,04)	{\color{black}\footnotesize RLC extraction}
+		\put(45,04)	{\color{black}\footnotesize RLCK extraction}
+	\end{overpic}
+\caption{Examples of different methods of circuit extraction from layout.}
+\label{fig-extraction_example}
+\end{figure}
+
+%Note that extraction examples in Figure~\ref{fig-extraction_example} depend on the employed software and its context of usage. For example, a designer that will extract his developed layout and decided to use R extraction with \SI{25}{\micro\metre} of circuit division. Assuming that the developed design is a piece of metal measuring \umsquare{100}{10}, then the parasite extractor will divide the circuit in four resistors with R=\num{25}$\times$\num{10}$\times$R\textsubscript{$\square$}~$\Omega$. In other words circuit extraction depends on the choice of designer and how the circuit will be divided by extractor.
+
+Note that extraction examples in Figure~\ref{fig-extraction_example} depend on the employed software and its context. For example, a designer wants to extract his layout and decided to use R extraction with \SI{25}{\micro\metre} of circuit division. Assuming that the developed design is a piece of metal measuring \umsquare{100}{10}, then the parasite extractor can divide the circuit into four resistors with R=\num{25}$\times$\num{10}$\times$R\textsubscript{$\square$}~$\Omega$. In other words, circuit extraction depends on the choice of designer and how the circuit will be divided by the extractor software.
+%%
+\detail{paragraph to exemplify the influence of the parameter setting for extraction and the dependency on the designer experience and circuit purpose.}
+
+%Parameter setting for extraction is a challenge task because it is highly dependent on the projected circuit and its specifications, meaning that setting bad extraction parameter values can lead to completely different (and wrong) results. For example layout of Figure~\ref{fig-inductor}, was simulated in order to evaluate its performance according to different types of circuit extractions. The tools used in this example were \assura QRC for the circuit extractions and \keysight \momentum to \gls{em} simulation\footnote{Actually these tools were used within the design of all circuits developed in this work.}, schematic response was included in graph for comparative purposes.
+
+Parameter setting for extraction is challenging because it is highly dependent on the circuit and its specifications. That means that setting bad extraction parameter values can lead to completely different (and sometimes wrong) results. For example, the layout of Figure~\ref{fig-inductor}, was simulated to evaluate its S-parameter performance according to different types of circuit extractions. The tools used in this example were \assura QRC for the circuit extractions and \keysight \momentum to \gls{em} simulation, the schematic response was included in the graph of Figure~\ref{fig-inductors_extraction} for comparative purposes.
+%%
+\detail{Parameter setting importance is reinforced in this paragraph with introduction of extraction simulation to support the idea.}
+\begin{figure}%[!ht]
+\centering
+	\begin{overpic}[scale=1.4]{chapters/images/chapter05/inductor}
+		\put(75,15)	{\color{black}\footnotesize output}
+		\put(13,53)	{\color{black}\footnotesize input}
+		\put(60,50)	{\color{black}\footnotesize ground line}
+		\put(20,43)	{\color{black}\footnotesize ground layer}
+	\end{overpic}
+\caption{Circuit simulated with different extraction methods.}
+\label{fig-inductor}
+\end{figure}
+
+%Layout of figure is composed of an one turn octagonal inductance with a line of \umsquare{100}{10} on each access and a ground line connecting to the inductance ground pad. Figure~\ref{fig-inductors_extraction} are the input impedance results of each extracted circuit including \gls{em} simulation. Inductance value and metal dimensions are not important in this example because in this simulation we stress the difference on curves response for the same circuit during different extraction methods.
+
+The layout in Figure~\ref{fig-inductors_extraction} is composed of a one turn octagonal inductance with a line of \umsquare{100}{10} on both the input and the output access, a ground line connect to the inductance ground layer. Figure~\ref{fig-inductors_extraction} illustrates the input impedance results for the circuit with different kinds of extraction, including \gls{em} simulation. Inductance value and metal dimensions are not important in this example because we want to stress the difference within the curves response for the same circuit as motivation to investigate different extraction methods.
+
+%It is noted that, since we are using modeled inductances from \qubic technology, \assura performs extraction outside modeled cells, here the cells works as s-parameters black boxes; although on \gls{em} simulation it is transparent if there is a component model or not during analysis, and \momentum perform \gls{em} simulation in all metal layers present on the circuit.
+\begin{figure}%[!hbt]
+\centering
+\includegraphics{chapters/images/chapter05/inductors_extraction}
+\caption{Comparison of simulation on input impedance of same circuit and with different extraction types.}
+\label{fig-inductors_extraction}
+\end{figure}
+
+%Simulations show error-prone results due high dependency on the choice of extraction parameters, the fact that technology component cells are modeled as a black-box (that are not considered during \assura extraction) also turns to be a problem because only metal lines in layout are extracted. 
+
+Simulations can lead to erroneout result interpretations due to its high dependency on the choice of extraction parameters, the fact that the technology component cells are modeled as a black-box, and therefore some parasites are not well modeled, also happens to be a problem because only the connected metal lines have the parasites computed. This way the simulation results rely on the modeled parasitics of each technology component.
+
+%Additionally, note that R, C, RC, RLC and RLCK extractions in example give virtually the same frequency response (Figure~\ref{fig-inductors_extraction}), what implies that the circuit is a lumped-element circuit, because \assura cannot model interferers of the model inductor. Furthermore, \gls{em} simulation gives a completely different result. At this point only information collected was that none extraction techniques was reliable because none comparison structure was available (measurement results).
+
+Additionally, note that R, C, RC, RLC and RLCK extractions in the example give virtually the same frequency response (Figure~\ref{fig-inductors_extraction}), this result corroborates with the statement that the circuit is better modeled as a distributed-element circuit, because \assura cannot model the interferers of the inductor. Furthermore, \gls{em} simulation gives a completely different result. At this point, the only information collected was that no extraction techniques were reliable because none comparison structure was available.
+%%
+\attention{Conclusion that none of extraction methods are reliable is unnecessary when exposed alone. I need to trace a line between this conclusion and the necessity to develop knowledge on how the circuit size influences on reference plane}
+
+%At this point it was important to make a choice of how to predict circuit response and its interferers, and also to determine a rule of thumb of how to choose between \gls{em} extraction or regular extraction.
+
+% - Layout design with {EM} simulation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Investigations on mm-Wave co-design}
+%Because in \gls{mmwaves} electrical wavelength (\SIrange{30}{300}{\giga\hertz}) varies between \SI{1.5e-1}{\milli\meter}~$\leq\lambda\leq$~\SI{1.5e-11}{\milli\meter}, and silicon design circuit dimensions have usually same order of magnitude (normally hundreds of \si{\square\micro\meter}), phase change effects cannot be neglected, thus it is necessary to analyze different extraction modes in order to better adapt the design flow to the circuits being projected. Typically, \gls{em} modeling is preferred to problems of distributed elements, but different extraction modes have been evolving and worth to be investigated.\addref
+
+% Because in \gls{mmwaves} electrical wavelength (\SIrange{30}{300}{\giga\hertz}) varies between \SI{1.5e-1}{\milli\meter}~$\leq\lambda\leq$~\SI{1.5e-11}{\milli\meter}, and silicon design circuit dimensions have usually same order of magnitude (normally hundreds of \si{\square\micro\meter}), phase change effects cannot be neglected. Also, the dimensions of the circuits designed in this work are bigger than the normal due to the co-design strategies. This means that the full circuit can be designed in a row, and therefore the circuit itself is electrically larger than the isolated circuit components.
+Because in \gls{mmwaves} wavelength (\SIrange{30}{300}{\giga\hertz}) varies between \SI{1}{\cm}~$\leq\lambda\leq$~\SI{1}{\mm} in free-space, and silicon design circuit dimensions have usually same order of magnitude (normally hundreds of \si{\square\micro\meter}), phase change effects cannot be neglected. Also, the dimensions of the circuits designed in this work are bigger than the normal due to the co-design strategy. This means that the full circuit can be designed in a row, and therefore the circuit itself is electrically larger than the isolated circuit components.  
+
+Thus it is necessary to analyze different extraction modes to better adapt the design flow to the circuits being projected. Typically, \gls{em} modeling is preferred to problems of distributed elements, but different extraction modes have been evolving and worth to be investigated
+
+%added
+During the investigation, five circuits were sent to fabrication within three fabrication runs. The circuit sent in the first run was a \SI{60}{\giga\hertz} \gls{lna} working on \gls{ism} band. After on the second run, two circuits were sent, an octagonal ring resonator filter, and a filtering \SI{60}{\giga\hertz} \gls{lna} that uses the octagonal ring filter. Finally, in the last run, we sent a meander version of the filtering \SI{60}{\giga\hertz} \gls{lna} and the meander filter itself. The meander ring filter is a smaller version of the ring resonator.
+
+%First structure sent to fabrication was an \gls{lna} working in the \SI{60}{\giga\hertz} \gls{ism} band. At the time of its conception classical workflow was used because circuit layout had \SI{390}{\square\milli\meter} what is approximately ten times smaller than wavelength at \SI{60}{\giga\hertz} ($\lambda$\textsubscript{@\SI{60}{\giga\hertz}}~$\approx$~\SI{5}{\milli\metre}), and therefore simulated results were expected to be good approximations of circuit response. In addition, RLCK extraction was preferred over \gls{em} modeling because it was unknown how its circuit extraction would perform.
+
+The first circuit (\gls{lna} \SI{60}{\giga\hertz}) was realized within a workflow with only RLCK circuit extraction. No \gls{em} simulation was performed. This simulation choice was taken because circuit layout had \umsquare{750}{520}, therefore with width of about six times smaller than the signal wavelength at \SI{60}{\giga\hertz} in freespace ($\lambda$\textsubscript{@\SI{60}{\giga\hertz}}~$\approx$~\SI{5}{\milli\metre}). Therefore simulated results were expected to be good approximations of circuit response.
+
+%%
+\attention{To the {\bf presentation} it is important to stress the time flow of circuit production and why the second circuit did not work}
+
+%Even though RLCK circuit extraction have performed well during s-parameters comparison with measurements (Figure~\ref{fig_lna_extraction_diff}, left side), it was noted that at frequencies nearby \SI{60}{\giga\hertz} s-parameters started to diverge. Parameter S\textsubscript{11}, for example, shows a drop at \SI{60}{\giga\hertz} that was not followed during measurements. Furthermore, although the measurements and simulation values are not exactly the same, it can be seen that \gls{em} modeling follows same tendency. 
+
+Even though RLCK circuit extraction have performed well during s-parameters comparison with measurements (Figure~\ref{fig_lna_extraction_diff}, left side), frequencies nearby \SI{60}{\giga\hertz} s-parameters begin to deviate. Parameter S\textsubscript{11}, for example, shows a drop at 60 GHz that not meet simulations. Furthermore, although the measurements and simulation values are not exactly the same, it can be seen that \gls{em} modeling follow the same tendency. 
+
+In addition, in the right side of Figure~\ref{fig_lna_extraction_diff} is shown the absolute error in log scale between different extraction modes and measurement (E\textsubscript{a}=\textbar S\textsubscript{measure}--S\textsubscript{simulation}\textbar), so it is possible to analyze the extraction parameters more systematically, it is seen that although gain (S\textsubscript{21}) is better represented using RLCK extraction (smaller error), \momentum modeling error is more constant. For the other parameters (S\textsubscript{11} and S\textsubscript{22}) RLCK extraction shows higher error than on \gls{em} modeling, while small response drops happen with all extraction methods.
+\attention[inline]{remove black line (measurement) from figure~\ref{fig_lna_extraction_diff}, and correct line colors so they are the same on two columns}
+\begin{figure}%[!hbt]
+\centering
+\includegraphics{chapters/images/LNA60_extraction_diff2}
+\caption[Comparison of measured \SI{60}{\giga\hertz} LNA and simulation results in different modes of extraction.]{Comparison of measured \SI{60}{\giga\hertz} LNA and simulation results in different modes of extraction. First column show s-parameters of measured and simulated structures, second column is the corresponding absolute error of simulations related to the measurement of each s-parameter.}
+\label{fig_lna_extraction_diff}
+\end{figure}
+% \begin{figure}[!ht]
+% \centering
+% \includegraphics{chapters/images/LNA60_extraction_error}
+% \caption{.}
+% \label{fig_lna_extraction_error}
+% \end{figure}
+
+%added paragraph
+From the S-parameter error calculated due to simulation and measurements (Figure~\ref{fig_lna_extraction_diff}) we can speculate that, although the error is smaller on RLCK extractinon for frequencies bellow \SI{60}{\giga\hertz}, in the parameter S\textsubscript{21}, the error with \gls{em} extraction have less variation, further the error is even smaller on the other parameters (S\textsubscript{11} and S\textsubscript{22}).
+
+%The second active circuit set to fabrication was a version of the \gls{lna} connected with a filter; hence a filtering \gls{lna} that is intended to be a part of this work objective. During the design stage the circuit was developed cascading the circuits (first stage amplifier, filter resonator, then second and third amplifier resonator connected in cascade). The resonator was electromagnetically simulated because RLCK circuit extraction do not model appropriately the resonant effect of the ring; also, this simulation flow was chosen because the circuit size was \SI{1.34}{\square\milli\metre}, and so it was expected no phase delay in layout.
+The second active circuit set to fabrication was a version of the \gls{lna} connected with a filter, hence a filtering \gls{lna} that is intended to be a part of this work objective. During the design stage, the circuit was developed cascading the circuits(first stage amplifier, filter resonator, the second and third amplifier resonator connected in cascade). The resonator was electromagnetically simulated because RLCK circuit extraction does not model appropriately the resonant effect of the ring. Also, this simulation workflow was used because the circuit size was \SI{1.34}{\square\milli\metre}, and so it was expected unimportant phase delay along layout realization.
+
+%Also, a first version of the filtering \gls{lna} was simulated using a two part simulation with the resonator electromagnetically simulated because RLCK circuit extraction do not model appropriately the resonant effect of the ring; also, this simulation flow was chosen because the circuit size was \SI{1.34}{\square\milli\metre}, and so it was expected no phase delay in layout. 
+
+%Standing that during simulations each s-parameters components were used and that during its simulations it was virtually granted that both structures (resonator and cascode stages) were optimally adapted, it could be expected that the simulation response of the full circuit were correct. Actually, it happens that due circuit size and characteristics reference plan is not the same over the the circuit and this effect have to be taken into account during the design. Therefore, the first version of filtering \gls{lna} did not performed as expected\footnote{Full circuit description is given in~\autoref{chap:realization60}.}.
+
+Standing that during simulations it was virtually granted that both structures (resonator and cascode stages) were optimally adapted, and it would be expected that the simulation response of the full circuit was correct. It happens that due to the circuit size and its characteristics, the reference plane is not electrically the same over the IC, what should be taken into account during the design. And therefore, the first version of filtering LNA did not perform as expected\footnote{Full circuit description is given in~\autoref{chap:realization60}.}.
+%%
+\detail{this paragraph is proposed to describe the problem of the filtering lna circuit and explain why it did not work.}
+
+%After measurements it was noted that even though s-parameters were used, and during simulations it was virtually granted that both structures (resonator and cascode stages) were optimally adapted then its response are the cascade effect of both structures, the simulation did not grant that the reference plan is the same in all layout\footnote{Full circuit description is given in~\autoref{chap:realization60}.}.
+
+%So in this context it is important to take advantage of \gls{cad} design to evaluate different configurations of the reference plan in the circuit and better investigate the behavior of circuit on its various compositions. For example the second version of filtering \gls{lna} (Figure~\ref{fig_filtering_lna_cad}) was proposed with a more compact version of the resonator filter, and a different topology. Electromagnetic modeling of full passive part of circuit was performed in order to describe and optimize its behavior.
+
+
+Hence, it is important to take advantage of \gls{cad} design in order to evaluate different configurations of the reference plane and better investigate the behavior of the circuit. For example, the second version of filtering \gls{lna} (Figure~\ref{fig_filtering_lna_cad}) was proposed with a more compact version of the resonator filter, and a different topology. Electromagnetic modeling of the full passive part of the circuit was performed in order to describe and optimize its behavior.
+%%
+\detail{And so, after the last paragraph, it is shown how the problem was attacked and what is attended with the used method.}
+
+%\gls{em} circuit modeling is performed taking into account full passive circuit interactions, every passive/active connection on the circuit is modeled as a \momentum port in the \gls{em} model and further connected to the active parts of the circuit. This way it is also possible to be aware of the reference plan behavior and its interactions with the circuit components.
+
+\gls{em} circuit modeling is performed taking into account all interactions of the circuit parasites. Every connection between passive and/or active component on the circuit is modeled as a \momentum port in the \gls{em} model and further connected to the active parts of the circuit. This way it is also possible to be aware of about the reference plane interactions with the circuit components.
+
+\begin{figure}[!hbt]
+\centering
+	\begin{overpic}[scale=1]{chapters/images/filteRING_cad_v2}
+	\end{overpic}
+\caption{Passive section of the second version of filtering LNA design.}
+\label{fig_filtering_lna_cad}
+\end{figure}
+
+In the design of Figure~\ref{fig_filtering_lna_cad} all the plane in red and blue is the ground plane (reference) connected with \emph{vias} going from metal one up to metal six. Circuit ground pads are connected using \gls{gsg} probes, and therefore reference is not the same all over the circuit.
+
+\subsection{Reference plane influence over design}
+%Reference plan carry out a great importance on \gls{mmwaves} circuit design. That happens because wavelength of radiated signals are of same order of magnitude of circuit, as aforementioned. For example Figure~\ref{fig_filter_mom_full} illustrates the response of the filter resonator used in the second version of the filtering \gls{lna}. Note that the response changes with different ground port positions; in the upper design red dots mark stacked ports configuration, in this configuration both signal and ground ports are connected on metal six (\emph{yellow}) and metal one (\emph{blue}) respectively one over the other.
+
+Reference plane carries out great importance on \gls{mmwaves} circuit design. That happens because the wavelength of the irradiated signal is of the same order of magnitude of the circuit, as aforementioned. For example, Figure~\ref{fig_filter_mom_full} illustrates the different responses of the filter resonator used in the second version of the filtering \gls{lna} due to different port configuration. Note that the response changes with different ground port positions.
+
+In the upper design of Figure~\ref{fig_filter_mom_full} red dots mark stacked differential ports configuration, in this configuration both signal and ground ports, are connected on metal six (\emph{yellow}) and metal one (\emph{blue}).
+
+\begin{figure}[!hbt]
+\centering
+	\begin{overpic}[scale=1]{chapters/images/chapter05/chapter05_vsz/filter_mom_full}
+	\end{overpic}
+\caption{Reference plan influence over resonator circuit design.}
+\label{fig_filter_mom_full}
+\end{figure}
+
+%In the bottom design of Figure~\ref{fig_filter_mom_full} red dot performs the same way from last design, blue and green dots are two parts of a differential port were blue dot is the signal port and green dots are both ground ports. It is seen that s-parameters differs from last design due ground ports placement, what influences filter circuit adaptation to the active part of circuit that must be placed before the resonator, and connected to \gls{rf} input (blue dot).
+
+In the bottom design of Figure~\ref{fig_filter_mom_full} red dot performs the same way that in the last design, blue and green dots are two parts of the differential port were blue dot is the signal port and green dot is ground port. It is seen that s-parameters differ from last design due to ground ports placement, what influences the filter circuit adaptation to the active part of the circuit, that in this case must be placed before the resonator, and connected to \gls{rf} input of the filter (blue dot).
+
+The difference in the simulation response implies that the designer has to perform the simulations according to the circuit connection during usage (measurements). The impact of these steps for co-design methodologies is that: first, the number of EM simulations can grow fast, and therefore the time spent on the design; second, the blueprint of the layout can change during the design, what favors co-design methodologies since in these cases the full circuit is implemented.
+%%
+\detail{In the complete version of the filtering LNA, this peak (that appears approximately on 55 GHz in figure~\ref{fig_filter_mom_full}) will descend in frequency due diverse interactions with active part of circuit that will influence its input adaptation. It is an important point to discuss in presentation}
+
+\section{mm-Wave design simulation}
+% Based in the classical design work-flow (Figure~\ref{fig-design_flux}) is proposed a slight different layout design flow that introduces \gls{em} analysis concurrently with classical circuit extraction (Figure~\ref{fig-proposed_flow}). In this design flow two parallel issues exists after the previously schematic simulation is performed. In first -- passive design side -- the full circuit passive components are \gls{em} simulated, and in the second -- active design side -- classical circuit extraction is performed.
+Based on the classical design work-flow (Figure~\ref{fig-design_flux}) a different layout design methodology that introduces field analysis concurrently with classical circuit extraction (Figure~\ref{fig-proposed_flow}) is proposed. In this methodology, two complementary circuits remain after the previously schematic simulation is performed. In the first circuit, on the passive design side, all passive components of the circuit are electromagnetically simulated. In the second, that is the circuit that includes the active design side of the circuit, classical circuit extraction is performed.
+\begin{figure}%[!hbt]
+\centering
+	\begin{overpic}[scale=1]{chapters/images/chapter05/design_flux_new}
+	\end{overpic}
+\caption{Proposed concurrent design flow for analog circuit.}
+\label{fig-proposed_flow}
+\end{figure}
+
+% On passive design side, \emph{layout block EM simulation} block states that many iterations for \gls{em} modeling are necessary, illustrated by red arrow. These iterations are necessary in order to find and suppress mutual interference in design; in this step \gls{em} simulation of full passive circuit is performed (including the reference plan), and then an schematic view of a multi-port s-parameters of the circuit is generated. 
+On the passive design side of the layout block, as many iterations as necessary of \gls{em} simulation are performed, illustrated by the red arrow in Figure~\ref{fig-proposed_flow}. These iterations are required to find and to reduce mutual interference in design; in this step \gls{em} simulation of the complete passive components of the circuit including the reference plan is performed, and then a schematic view with a multi-port s-parameters  is generated.
+
+% On the active design side the very same procedure of Figure~\ref{fig-design_flux} is taken into account. After layout design, \gls{lvs} and circuit extraction is executed, and if everything goes right then layout can be used in next step. Though, attention must be given to the blueprint of both layout structures (passive and active), these structures have to be designed in a way they connect flawlessly, with no gaps or superposition.\detail{Otherwise simulated component could be not physically accurate}
+On the active design side, the very same procedure of Figure~\ref{fig-design_flux} is taken into account. After the schematic simulation is according to the specifications, layout design is performed and so \gls{lvs} and circuit extraction. Once everything is right with the extracted circuit, then the layout can be used in the next step. Because both circuits are complementary, attention must be given to the blueprint of both passive and active layout structures. These structures have to be designed in a way they connect flawlessly, with no gaps or superposition.
+
+\begin{figure}[!hbt]
+	\centering
+		\begin{overpic}[]{chapters/images/testbench}
+		\end{overpic}
+	\caption{Test-bench example for multiple extraction design used in this work.}
+	\label{fig_testbench}
+\end{figure}
+
+% Next step is to create a schematic view with two connected structures: First that contains a multi-port (\textit{n}-port s-parameter) black-box for the passive part of circuit, and the second is the RLCK extracted circuit (using \assura) that contains all the active components. Final layout is then the concatenation of layout views (extracted and \gls{em} simulated) corresponding to the structures used in last schematic simulation (Figure~\ref{fig_testbench}).
+The next step is to create a schematic view with the two connected structures: 
+the extracted circuit containing the active models and the electromagnetically simulated circuit. The final layout is the concatenation of layout views (extracted and \gls{em} simulated) corresponding to the structures used in the last schematic simulation (Figure~\ref{fig_testbench}). The final layout do not have an unique extracted view in this method, although the it is formed with all views that are individually electromagnetically simulated or circuit extracted.
+
+% The presented concurrent design flow was developed according the needs of circuits proposed in this work (further sections), and demonstrated to be adapted for \gls{mmwaves} band design with silicon technology. In addition, great attention must be given during \gls{em} simulation due its huge use of computer resources, otherwise computation time quickly become unfeasible.
+This complementary design flow was developed according with the design needs of the circuits proposed in this work (as demonstrated in further sections). It demonstrated to be adapted for \gls{mmwaves} band design in silicon SiGe:C BiCMOS technology because the models for the active devices included in the \gls{pdk} includes a high-frequency response. Finally, it is important to be aware that during EM simulation due to its huge use of computer resources computation time can quickly become an enormous constraint.
+
+\section{Discussion}
+During the development of this work special attention about the design methodology was taken into account, the idea of documenting the the flux procedure became imperative due to the lack of literature found in the subject of layout techniques. This consideration become even more important if we consider that the use of silicon technologies on \gls{mmwaves} circuit design is still an emerging process. Therefore, one of the most important contributions of this work are the consiretarions on layout design demonstrated in this chapter.
+
+In that regard, it could be said that the importance of  the design methodology was neglected at first. However, at the time of first measurements we started to discuss about how to accord more attention to the simulation steps in orther to obtain models that better represent the circuit. Originally our difficulty was to compare the simulated results with measurements, since we had not any device to compare and therefore our first fabricated circuit did not met our simulations during measurements.
+
+Imediatelly we noted that more effort had to be given in order to develop a more systematic approach to analog circuit design. We noted that at this point it was important to design a layout that match the electric and magnetic iterations that happens on the physical circuit with reliability.
+
+In this chapter specific attention to the design flux is given to facilitate simulation procedure. It is written in a way so it could be possible to use these procedures in order to design and simulate any \gls{mmwaves} circuits fabricated in silicon. Finally, this simulation approach can be easily adapted in a co-design environment not only were circuit and devices can be optimized to meet the specifications, but also on a system level where multiple circuits have to be optimized at the same time.

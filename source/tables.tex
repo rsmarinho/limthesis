@@ -1,0 +1,23 @@
+% Ne pas changer ce fichier.
+
+\newpage
+\tableofcontents
+
+\newpage
+\listoffigures
+
+\newpage
+\listoftables
+
+\newpage
+%\glsnogroupskiptrue
+\renewcommand{\glossarypreamble}{%
+\glsfindwidesttoplevelname[\currentglossary]
+}
+\renewcommand*{\glstreenamebox}[2]{%
+\makebox[#1][r]{#2~~--~~}%
+}
+\setglossarystyle{alttree}
+\printglossary[title=List of Abbreviations]
+%\printglossary[style=index,title=List of Abbreviations]
+\clearpage
