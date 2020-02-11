@@ -12,7 +12,7 @@ This model works with overleaf.
 
 ## To clone this repository just type:
 ```
-git clone git@github.com/rsmarinho/limthesis.git
+git clone https://github.com/rsmarinho/limthesis.git
 ```
 
 ## To send updated files to github use:
